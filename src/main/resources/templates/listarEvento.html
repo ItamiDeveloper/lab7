@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Listado de Eventos</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h1 class="mb-4">Listado de Eventos</h1>
+            <div class="d-flex justify-content-end mb-3">
+                <a href="/eventos/reporte/pdf" class="btn btn-danger">Reporte PDF</a>
+                <a href="/eventos/reporte/excel" class="btn btn-success ms-2">Reporte EXCEL</a>
+                <a href="/eventos/nuevo" class="btn btn-primary ms-2">Registrar Evento</a>
+            </div>
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Fecha y Hora</th>
+                        <th>Lugar</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="evento : ${eventos}">
+                        <td th:text="${evento.id}"></td>
+                        <td th:text="${evento.titulo}"></td>
+                        <td th:text="${evento.fecha}"></td>
+                        <td th:text="${evento.lugar}"></td>
+                        <td th:text="${evento.descripcion}"></td>
+                        <td>
+                            <!-- Enlace para editar el evento -->
+                            <a th:href="@{/eventos/editar/{id}(id=${evento.id})}" class="btn btn-sm btn-warning">Editar</a>
+                            <!-- Enlace para eliminar el evento -->
+                            <a th:href="@{/eventos/eliminar/{id}(id=${evento.id})}" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
